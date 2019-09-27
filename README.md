@@ -23,8 +23,14 @@ This has been tested on Raspbian Buster Linux.
 
     ./build.sh
 
-## Acknowledgements
+## References
+https://style64.org/petscii/  
+https://en.wikipedia.org/wiki/PETSCII  
+https://dflund.se/~triad/krad/recode/petscii_c64en_uc.txt  
+https://dflund.se/~triad/krad/recode/petscii_c64en_lc.txt ─ These were used to generate some code using enter-unicode.  
+https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences  
 
+## Acknowledgements
 See also: https://github.com/commanderx16/x16-emulator/pull/112
 
 I would like to thank [@mist64](https://github.com/mist64) for reviews.
