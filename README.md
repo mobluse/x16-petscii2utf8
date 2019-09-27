@@ -15,7 +15,15 @@ if you have a version of `x16emu` that doesn't have `-echoraw` you can use `-ech
 
     x16emu -echo | petscii2utf8
 
-Release 31 and lower of the emulator buffers output, but this will be fixed in the next release.
+Release 31 and lower of the emulator buffers output, but this is fixed in release 32. I you want -echoraw you can download the source of x16-emulator, patch it, and run:
+
+    curl -L https://github.com/commanderx16/x16-emulator/pull/135.patch > /tmp/135.patch
+    git apply --check /tmp/135.patch
+    git apply /tmp/135.patch
+    make package_linux
+    make clean
+    unzip x16emu_linux.zip
+    ./x16emu -echoraw | ../x16-petscii2utf8/petscii2utf8
     
 ## Building it
 Unfortunately I don't know `make` or `CMake` so I made a script `build.sh` that compiles the code to executables.
