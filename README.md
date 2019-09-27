@@ -27,4 +27,4 @@ This has been tested on Raspbian Buster Linux.
 
 See also: https://github.com/commanderx16/x16-emulator/pull/112
 
-I would like to thank @mist64 for reviews.
+I would like to thank [@mist64](https://github.com/mist64) for reviews.
