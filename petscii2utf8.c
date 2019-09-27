@@ -1,3 +1,8 @@
+/*** petscii2utf8 is a filter
+ *** Copyright (c) 2019, Mikael O. Bonnier, Lund, Sweden
+ *** All rights reserved.
+ *** See LICENSE file.
+ ***/
 #include <stdio.h>
 #include <stdint.h>
 
