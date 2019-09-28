@@ -1,6 +1,5 @@
-/* Prints characters when using option -echo with the correct looking characters.
-   Currently only works in ISO8859-15 mode and not PETSCII and only supports characters on
-   EN-GB and SV-SE keyboard.
+/* Prints characters when using option -echo with x16emu with the correct looking characters.
+   Supports PETSCII-UC, PETSCII-LC, and ISO8859-1.
 */
 
 /* Commander X16 BASIC V2 program to generate ASCII/ISO8859-15 codes by pressing keys:
@@ -15,5 +14,9 @@
 #include <stdint.h>
 
 void echochar(uint8_t c);
+void prtchflush(uint8_t c);
+void prtuptflush(uint32_t utf);
+void prtflush(const char *s);
+void prtnumflush(const char *s, uint8_t c);
 
 #endif

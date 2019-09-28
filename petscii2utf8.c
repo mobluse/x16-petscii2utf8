@@ -2,19 +2,16 @@
 #include <stdint.h>
 
 #include "utf8_encode.h"
+#include "catchkey.h"
 #include "petscii2utf8.h"
-
-void prtchflush(uint8_t c);
-void prtuptflush(uint32_t utf);
-void prtflush(const char *s);
-void prtnumflush(const char *s, uint8_t c);
 
 int
 main(void)
 {
+	prtflush("\e[!p");
 	int c;
 	while ((c = getchar()) != EOF)
-		echochar(c);
+		catchkey(c);
 	return 0;
 }
 
@@ -25,19 +22,21 @@ echochar(uint8_t c)
 	static int shifted = 0; /* 0: Unshifted, 1: Shifted */
 	static int color = 97;
 	static int backcolor = 44;
+
 	if ((0x00 <= c && c <= 0x1F) || (0x80 <= c && c <= 0x9F)) {
 		switch (c) {
 			case 0x05: prtnumflush("\e[%dm", color = 97); break; /* white */
-			case 0x0A: prtuptflush(0x24B6); /* Ⓐ intentional fall through */
-			case 0x0D: /* CR, but acts like NL */
-			case 0x8D: prtflush("\n"); /* LF, but acts like NL */
+			case 0x0A: prtuptflush(0x24B6); goto x8D; break; /* Ⓐ */
+			case 0x0D: prtuptflush(0x24B9); /* CR, but acts like NL */ /* intentional fall through */
+			case 0x8D:
+x8D:				prtflush("\n"); /* LF, but acts like NL */
 			case 0x92: prtnumflush("\e[0;%dm", backcolor); prtnumflush("\e[%dm", color); break; /* reverse off */
 			case 0x0E: shifted = 1; break;    /* lower case, text mode */
 			case 0x0F: mode = 1; shifted = 1; break; /* ISO mode */
 			case 0x11: prtflush("\e[B"); break; /* down */
 			case 0x12: prtflush("\e[7m"); break; /* reverse on */
 			case 0x13: prtflush("\e[H"); break; /* home */
-			case 0x14: prtflush("\x7F"); break; /* delete, maybe change to backspace */
+			case 0x14: prtflush("\x08\e[1P"); break; /* delete, maybe change to backspace */
 			case 0x1B: prtflush("\e"); break; /* escape, not part of PETSCII, but useful in VT100 */
 			case 0x1C: prtnumflush("\e[%dm", color = 31); break; /* red */
 			case 0x1D: prtflush("\e[C"); break; /* forward */
@@ -134,8 +133,8 @@ echochar(uint8_t c)
 							case 1:
 								switch (c) {
 									case 0x7E: prtuptflush(0x2592); break; // ▒
-									case 0x7F: prtuptflush(0x2592); break; // ▒ aprox.
-									case 0xA9: prtuptflush(0x2592); break; // ▒ aprox.
+									case 0x7F: prtuptflush(0x2591); break; // ░ aprox.
+									case 0xA9: prtuptflush(0x2593); break; // ▓ aprox.
 									case 0xBA: prtuptflush(0x2713); break; // ✓
 									case 0xFF: prtuptflush(0x2592); break; // ▒
 									default:
