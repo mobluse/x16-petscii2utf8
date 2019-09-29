@@ -17,6 +17,7 @@ main(void)
 	int c;
 	while ((c = getchar()) != EOF)
 		catchkey(c);
+//		echochar(c);
 	return 0;
 }
 

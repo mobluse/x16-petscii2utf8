@@ -24,7 +24,7 @@ void
 catchkey(uint8_t c)
 {
 	static int streak = 0;
-	static uint8_t streaktype = 'D'; /* 'D' = down, 'U' = up, 'R' = READY. */
+	static uint8_t streaktype = 'D'; /* 'D' = down, 'U' = up, 'N' = -echo, 'R' = -echoraw */
 	static uint8_t n1 = '0', n0 = '0';
 
 	if (streak == 0) {
@@ -35,7 +35,7 @@ catchkey(uint8_t c)
 			streaktype = 'U';
 			++streak;
 		} else if (c == '\n') {
-			streaktype = 'A';
+			streaktype = 'N';
 			++streak;
 		} else if (c == '\r') {
 			streaktype = 'R';
