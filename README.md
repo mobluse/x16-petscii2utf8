@@ -1,7 +1,10 @@
 # x16-petscii2utf8
 This filter program converts output of the [Commander X16 Emulator](http://commanderx16.com) to UTF-8 looking like
 PETSCII-UC, PETSCII-LC, or ISO8859-15 depending on what is used. Not all PETSCII codes are supported by Unicode.
-It also converts the control codes to VT100/xterm. Right now it also prints some debug information e.g. Ⓓ & Ⓐ for CR & LF. In the future also the keypresses will be shown, and there is some buggy support for that now.
+It also converts the control codes to VT100/xterm escape codes. Right now it also prints some debug information
+e.g. Ⓓ & Ⓐ for CR & LF. In the future also the keypresses will be shown, and there is some buggy support for that now.
+
+![Startup with OLD](startup.png?raw=true "Startup with OLD")
 
 ## Usage
 
@@ -23,7 +26,8 @@ READY. is changed to READY! or READY? depending if you use -echo raw or just -ec
     make clean
     unzip x16emu_linux.zip
     ./x16emu -echo raw | ../x16-petscii2utf8/petscii2utf8
-    
+
+![PETSCIIISO.BAS](petsciiiso-bas.png?raw=true "PETSCIIISO.BAS")
 ## Building it PETSCII2UTF8
 Unfortunately I don't know `make` or `CMake` so I made a script `build.sh` that compiles the code to executables.
 This has been tested on Raspbian Buster Linux.
