@@ -14,12 +14,14 @@ or if these are not installed:
 
     ./x16emu -echo raw | ../x16-petscii2utf8/petscii2utf8
     
-if you have a version of `x16emu` (32 or earlier) that doesn't have `-echo raw` you can use `-echo`, but then it doesn't
+if you have a version of `x16emu` (r32 or earlier) that doesn't have `-echo raw` you can use `-echo`, but then it doesn't
 look exactly right:
 
     x16emu -echo | petscii2utf8
 
-READY. is changed to READY! or READY? depending if you use -echo raw or just -echo. Release 31 and lower of the emulator buffers output, but this is fixed in release 32. I you want -echo raw you can download the source of x16-emulator, make, and run:
+`READY.` is changed to `READY!` or `READY?` depending if you use -echo raw or just -echo. Release 31 and lower of the
+emulator buffers output, but this is fixed in release 32. I you want -echo raw you can download the source of x16-emulator,
+make, and run:
 
     nano Makefile # Edit varibles in package section.
     make package_linux
@@ -27,10 +29,16 @@ READY. is changed to READY! or READY? depending if you use -echo raw or just -ec
     unzip x16emu_linux.zip
     ./x16emu -echo raw | ../x16-petscii2utf8/petscii2utf8
 
+Keys might work in Commander X16 Emulator r33 using:
+
+    ./x16emu -echo raw -log k | ../x16-petscii2utf8/petscii2utf8
+
+Keys in the terminal sending to the emulator does not work.    
+
 ![PETSCIIISO.BAS](petsciiiso-bas.png?raw=true "PETSCIIISO.BAS")
 ## Building it PETSCII2UTF8
 Unfortunately I don't know `make` or `CMake` so I made a script `build.sh` that compiles the code to executables.
-This has been tested on Raspbian Buster Linux.
+This has been tested on Raspbian Buster Linux. I would like it to build on macOS, but I have no Mac to test it on.
 
     ./build.sh
 
