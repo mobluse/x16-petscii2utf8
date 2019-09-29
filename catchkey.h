@@ -1,6 +1,32 @@
 #include <ctype.h>
 #include "petscii2utf8.h"
 
+#define SCAN2PETSCII(n) \
+	if (0x04 <= (n) && (n) <= 0x1D) { \
+		echochar('A' + (n) - 0x04); \
+	} else if (0x1E <= (n) && (n) <= 0x26) { \
+		echochar('1' + (n) - 0x1E); \
+	} else if ((n) == 0x27) { \
+		echochar('0'); \
+	} else if ((n) == 0x28) { \
+		; \
+	} else if ((n) == 0x2A) { \
+		echochar(0x14); \
+	} else if ((n) == 0x2C) { \
+		echochar(' '); \
+	} else if (0x2D <= (n) && (n) <= 0x38) { \
+		/* EN-GB keyboard */ \
+		char chars[] = "-=[]#?;'_,./"; \
+		echochar(chars[(n)-0x2D]); \
+	} else if ((n) == 0x4A) { \
+		echochar(0x13); \
+	} else if (0x4F <= (n) && (n) <= 0x52) { \
+		char cursorkeys[] = {0x1D, 0x9D, 0x11, 0x91}; \
+		echochar(cursorkeys[(n)-0x4F]); \
+	} else { \
+		prtnumflush("D%02X\n", (n)); \
+	}
+
 #define ECHOFIRST(n) \
 	for (int i = 0; i < (n); ++i) { \
 		echochar(s[i]); \
@@ -76,30 +102,7 @@ catchkey(uint8_t c)
 						hex[0] = n1;
 						hex[1] = n0;
 						sscanf(hex, "%02x", &n);
-						if (0x04 <= n && n <= 0x1D) {
-							echochar('A' + n - 0x04);
-						} else if (0x1E <= n && n <= 0x26) {
-							echochar('1' + n - 0x1E);
-						} else if (n == 0x27) {
-							echochar('0');
-						} else if (n == 0x28) {
-							;
-						} else if (n == 0x2A) {
-							echochar(0x14);
-						} else if (n == 0x2C) {
-							echochar(' ');
-						} else if (0x2D <= n && n <= 0x38) {
-							/* EN-GB keyboard */
-							char chars[12] = "-=[]#?;'_,./";
-							echochar(chars[n-0x2D]);
-						} else if (n == 0x4A) {
-							echochar(0x13);
-						} else if (0x4F <= n && n <= 0x52) {
-							char cursorkeys[4] = {0x1D, 0x9D, 0x11, 0x91};
-							echochar(cursorkeys[n-0x4F]);
-						} else {
-							prtnumflush("D%02X\n", n);
-						}
+						SCAN2PETSCII(n);
 					} else {
 						ECHOFIRST(streak-2);
 						echochar(n1);
@@ -160,7 +163,6 @@ catchkey(uint8_t c)
 				case 2: if (INSTREAK) {
 						++streak;
 					} else if (c == 0x0A) {
-						streak = 2;
 						echochar(c);
 					} else {
 						ECHOFIRSTFIX(streak);
@@ -191,7 +193,14 @@ catchkey(uint8_t c)
 		} else if (streaktype == 'R') {
 			const char *s = "\r\nREADY.\r\n";
 			switch(streak) {
-				case 1: PROC(streak); break;
+				case 1: if (INSTREAK) {
+						++streak;
+					} else if (c == 0x0D) {
+						echochar(c);
+					} else {
+						ECHOFIRSTFIX(streak);
+					}
+					break;
 				case 2: PROC(streak); break;
 				case 3: PROC(streak); break;
 				case 4: PROC(streak); break;
