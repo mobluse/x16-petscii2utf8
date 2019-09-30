@@ -23,13 +23,15 @@ look exactly right:
 emulator buffers output, but this is fixed in release 32. I you want -echo raw you can download the source of x16-emulator,
 make, and run:
 
+    git clone https://github.com/commanderx16/x16-emulator
+    cd x16-emulator/
     nano Makefile # Edit varibles in package section.
     make package_linux
     make clean
     unzip x16emu_linux.zip
     ./x16emu -echo raw | ../x16-petscii2utf8/petscii2utf8
 
-Keys might work in Commander X16 Emulator r33 using:
+Keys might work in the upcoming Commander X16 Emulator r33 using:
 
     ./x16emu -echo raw -log k | ../x16-petscii2utf8/petscii2utf8
 
@@ -40,6 +42,8 @@ Keys in the terminal sending to the emulator does not work.
 Unfortunately I don't know `make` or `CMake` so I made a script `build.sh` that compiles the code to executables.
 This has been tested on Raspbian Buster Linux. I would like it to build on macOS, but I have no Mac to test it on.
 
+    git clone https://github.com/mobluse/x16-petscii2utf8
+    cd x16-petscii2utf8
     ./build.sh
 
 ## References
