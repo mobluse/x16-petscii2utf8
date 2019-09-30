@@ -10,10 +10,15 @@
 #include "catchkey.h"
 #include "petscii2utf8.h"
 
+int debug = 0;
+
 int
-main(void)
+main(int argc, char **argv)
 {
-	prtflush("\e[!p");
+	if (argc >= 2 && argv[1][1] == 'd') {
+		debug = 1;
+	}
+	prtflush("\e[!p"); /* soft reset of VT100 */
 	int c;
 	while ((c = getchar()) != EOF)
 		catchkey(c);
@@ -26,16 +31,16 @@ echochar(uint8_t c)
 {   // TODO: handle quote mode
 	static int mode = 0; /* 0: PETSCII, 1: ISO8859-15 */
 	static int shifted = 0; /* 0: Unshifted, 1: Shifted */
-	static int color = 97;
-	static int backcolor = 44;
+	static int color = 97; /* white */
+	static int backcolor = 44; /* blue */
 
 	if ((0x00 <= c && c <= 0x1F) || (0x80 <= c && c <= 0x9F)) {
-		switch (c) {
+		switch (c) { uint32_t u;
 			case 0x05: prtnumflush("\e[%dm", color = 97); break; /* white */
-			case 0x0A: prtuptflush(0x24B6); goto x8D; break; /* Ⓐ */
-			case 0x0D: prtuptflush(0x24B9); /* CR, but acts like NL */ /* intentional fall through */
-			case 0x8D:
-x8D:				prtflush("\n"); /* LF, but acts like NL */
+			case 0x0A: u = 0x24B6; goto x8D; break; /* Ⓐ */
+			case 0x0D: u = 0x24B9; goto x8D; break; /* CR, but acts like NL */ /* intentional fall through */
+			case 0x8D: u = 0x24CB;
+x8D:				if (debug) {prtuptflush(u);} prtflush("\n"); /* LF, but acts like NL */
 			case 0x92: prtnumflush("\e[0;%dm", backcolor); prtnumflush("\e[%dm", color); break; /* reverse off */
 			case 0x0E: shifted = 1; break;    /* lower case, text mode */
 			case 0x0F: mode = 1; shifted = 1; break; /* ISO mode */
@@ -84,6 +89,7 @@ x8D:				prtflush("\n"); /* LF, but acts like NL */
 					case 0x5F: prtuptflush(0x2190); break; // ←
 					case 0x60: prtuptflush(0x2500); break; // ─ diff. triad
 					case 0x7B: prtuptflush(0x253C); break; // ┼
+					case 0x7C: prtuptflush(0xEE5C); break; // Style64
 					case 0x7D: prtuptflush(0x2502); break; // │
 					case 0xA0: prtuptflush(0x00A0); break; // nbsp
 					case 0xA1: prtuptflush(0x258C); break; // ▌
@@ -92,7 +98,9 @@ x8D:				prtflush("\n"); /* LF, but acts like NL */
 					case 0xA4: prtuptflush(0x2581); break; // ▁
 					case 0xA5: prtuptflush(0x258F); break; // ▏
 					case 0xA6: prtuptflush(0x2592); break; // ▒
-					case 0xA7: prtuptflush(0x2595); break; // ▕
+					case 0xA7: prtuptflush(0xEE67); break; // Style64
+					case 0xA8: prtuptflush(0xEE68); break; // Style64
+					case 0xAA: prtuptflush(0xEE6A); break; // Style64
 					case 0xAB: prtuptflush(0x251C); break; // ├
 					case 0xAC: prtuptflush(0x2597); break; // ▗ not in triad
 					case 0xAD: prtuptflush(0x2514); break; // └
@@ -104,6 +112,9 @@ x8D:				prtflush("\n"); /* LF, but acts like NL */
 					case 0xB3: prtuptflush(0x2524); break; // ┤
 					case 0xB4: prtuptflush(0x258E); break; // ▎
 					case 0xB5: prtuptflush(0x258D); break; // ▍
+					case 0xB6: prtuptflush(0xEE76); break; // Style64
+					case 0xB7: prtuptflush(0xEE77); break; // Style64
+					case 0xB8: prtuptflush(0xEE78); break; // Style64
 					case 0xB9: prtuptflush(0x2583); break; // ▃
 					case 0xBB: prtuptflush(0x2596); break; // ▖ not in triad
 					case 0xBC: prtuptflush(0x259D); break; // ▝ not in triad
@@ -117,21 +128,33 @@ x8D:				prtflush("\n"); /* LF, but acts like NL */
 									case 0x61: prtuptflush(0x2660); break; // ♠
 									case 0x62: prtuptflush(0x2502); break; // │
 									case 0x63: prtuptflush(0x2500); break; // ─ diff. triad
+									case 0x64: prtuptflush(0xEE44); break; // Style64
+									case 0x65: prtuptflush(0xEE45); break; // Style64
+									case 0x66: prtuptflush(0xEE46); break; // Style64
+									case 0x67: prtuptflush(0xEE47); break; // Style64
+									case 0x68: prtuptflush(0xEE48); break; // Style64
 									case 0x69: prtuptflush(0x256E); break; // ╮
 									case 0x6A: prtuptflush(0x2570); break; // ╰
 									case 0x6B: prtuptflush(0x256F); break; // ╯
+									case 0x6C: prtuptflush(0xEE4C); break; // Style64
 									case 0x6D: prtuptflush(0x2572); break; // ╲
 									case 0x6E: prtuptflush(0x2571); break; // ╱
+									case 0x6F: prtuptflush(0xEE4F); break; // ╱
+									case 0x70: prtuptflush(0xEE50); break; // Style64
 									case 0x71: prtuptflush(0x25CF); break; // ●
+									case 0x72: prtuptflush(0xEE52); break; // Style64
 									case 0x73: prtuptflush(0x2665); break; // ♥
+									case 0x74: prtuptflush(0xEE54); break; // Style64
 									case 0x75: prtuptflush(0x256D); break; // ╭
 									case 0x76: prtuptflush(0x2573); break; // ╳
 									case 0x77: prtuptflush(0x25CB); break; // ○
 									case 0x78: prtuptflush(0x2663); break; // ♣
+									case 0x79: prtuptflush(0xEE59); break; // Style64
 									case 0x7A: prtuptflush(0x2666); break; // ♦
 									case 0x7E: prtuptflush(0x03C0); break; // π
 									case 0x7F: prtuptflush(0x25E5); break; // ◥
 									case 0xA9: prtuptflush(0x25E4); break; // ◤
+									case 0xBA: prtuptflush(0xEE7A); break; // Style64
 									case 0xFF: prtuptflush(0x03C0); break; // π
 									default: prtchflush(c);
 								}

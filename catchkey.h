@@ -2,7 +2,7 @@
 #include "petscii2utf8.h"
 
 #define SCAN2PETSCII(n) \
-	if (0x04 <= (n) && (n) <= 0x1D) { \
+	do {if (0x04 <= (n) && (n) <= 0x1D) { \
 		echochar('A' + (n) - 0x04); \
 	} else if (0x1E <= (n) && (n) <= 0x26) { \
 		echochar('1' + (n) - 0x1E); \
@@ -18,33 +18,41 @@
 		/* EN-GB keyboard */ \
 		char chars[] = "-=[]#?;'_,./"; \
 		echochar(chars[(n)-0x2D]); \
+	} else if ((n) == 0x47) { /* ScrLk */ \
+		echochar(0x8F); /* PETSCII-UC */ \
+	} else if ((n) == 0x49) { \
+		echochar(0x94); \
 	} else if ((n) == 0x4A) { \
 		echochar(0x13); \
 	} else if (0x4F <= (n) && (n) <= 0x52) { \
 		char cursorkeys[] = {0x1D, 0x9D, 0x11, 0x91}; \
 		echochar(cursorkeys[(n)-0x4F]); \
+	} else if ((n) == 0x54) { \
+		echochar('/'); \
+	} else if ((n) == 0x63) { \
+		echochar('.'); \
 	} else { \
-		prtnumflush("D%02X\n", (n)); \
-	}
+		prtnumflush("D%02X", (n)); \
+	}} while (0)
 
 #define ECHOFIRST(n) \
-	for (int i = 0; i < (n); ++i) { \
+	do {for (int i = 0; i < (n); ++i) { \
 		echochar(s[i]); \
-	}
+	}} while (0)
 
 #define ECHOFIRSTFIX(n) \
-	ECHOFIRST(n) \
+	ECHOFIRST(n); \
 	(n = 0); \
 	echochar(c)
 
 #define INSTREAK (c == s[(streak)])
 
 #define PROC(n) \
-	if (INSTREAK) { \
+	do { if (INSTREAK) { \
 		++(n); \
 	} else { \
 		ECHOFIRSTFIX(n); \
-	}
+	}} while (0)
 
 void
 catchkey(uint8_t c)
