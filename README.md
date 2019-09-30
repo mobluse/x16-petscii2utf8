@@ -40,6 +40,7 @@ Keys might work in the upcoming Commander X16 Emulator r33 using:
 Keys in the terminal sending to the emulator does not work.    
 
 ![PETSCIIISO.BAS](petsciiiso-bas.png?raw=true "PETSCIIISO.BAS")
+Try [petsciiiso.bas](https://github.com/mobluse/chargen-maker/blob/master/petsciiiso.bas)!
 ## Building it PETSCII2UTF8
 Unfortunately I don't know `make` or `CMake` so I made a script `build.sh` that compiles the code to executables.
 This has been tested on Raspbian Buster Linux. I would like it to build on macOS, but I have no Mac to test it on.
