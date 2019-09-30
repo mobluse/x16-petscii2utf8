@@ -1,18 +1,18 @@
 # x16-petscii2utf8
 This filter program converts output of the [Commander X16 Emulator](http://commanderx16.com) to UTF-8 looking like
 PETSCII-UC, PETSCII-LC, or ISO8859-15 depending on what is used. Not all PETSCII codes are supported by Unicode.
-It also converts the control codes to VT100/xterm escape codes. Right now it also prints some debug information
-e.g. Ⓓ & Ⓐ for CR & LF. In the future also the keypresses will be shown, and there is some buggy support for that now.
+It also converts the control codes to VT100/xterm escape codes. It also prints some debug information
+e.g. Ⓓ & Ⓐ for CR & LF, if you use option -d. In the future also the keypresses will be shown, and there is some buggy support for that already.
 
 ![Startup with OLD](startup.png?raw=true "Startup with OLD")
 
 ## Usage
 
-    x16emu -echo raw | petscii2utf8
+    x16emu -echo raw | petscii2utf8 -d
 
 or if these are not installed:
 
-    ./x16emu -echo raw | ../x16-petscii2utf8/petscii2utf8
+    ./x16emu -echo raw | ../x16-petscii2utf8/petscii2utf8 -d
     
 if you have a version of `x16emu` (r32 or earlier) that doesn't have `-echo raw` you can use `-echo`, but then it doesn't
 look exactly right:
