@@ -1,6 +1,8 @@
 # x16-petscii2utf8
 This filter program converts output of the [Commander X16 Emulator](http://commanderx16.com) to UTF-8 looking like
-PETSCII-UC, PETSCII-LC, or ISO8859-15 depending on what is used. Not all PETSCII codes are supported by Unicode.
+PETSCII-UC, PETSCII-LC, or ISO8859-15 depending on what is used. Not all PETSCII codes are supported by current Unicode,
+but if you use the font from [Style64 (mono space)](https://style64.org/c64-truetype) in your terminal they can all be 
+shown, but then some of the ISO8859-15 characters are replaced by PETSCII.
 It also converts the control codes to VT100/xterm escape codes. It also prints some debug information
 e.g. Ⓓ & Ⓐ for CR & LF, if you use option -d. In the future also the keypresses will be shown, and there is some buggy support for that already.
 
