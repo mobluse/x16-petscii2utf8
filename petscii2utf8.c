@@ -20,9 +20,10 @@ main(int argc, char **argv)
 	}
 	prtflush("\e[!p"); /* soft reset of VT100 */
 	int c;
-	while ((c = getchar()) != EOF)
+	while ((c = getchar()) != EOF) {
 		catchkey(c);
 //		echochar(c);
+	}
 	return 0;
 }
 
