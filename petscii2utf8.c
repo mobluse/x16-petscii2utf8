@@ -37,14 +37,16 @@ echochar(uint8_t c)
 
 	if ((0x00 <= c && c <= 0x1F) || (0x80 <= c && c <= 0x9F)) {
 		switch (c) { uint32_t u; int tempcolor;
-			case 0x01: tempcolor = color; color = backcolor; backcolor = tempcolor; goto x92; break; /* swap colors */
+			case 0x01: tempcolor = color; 
+				color = (backcolor/10==4?30:90)+backcolor%10;
+				backcolor = (tempcolor/10==3?40:100)+tempcolor%10; goto x92; break; /* swap colors */
 			case 0x05: prtnumflush("\e[%dm", color = 97); break; /* white */
 			case 0x0A: u = 0x24B6; goto x8D; break; /* Ⓐ */
-			case 0x0D: u = 0x24B9; goto x8D; break; /* CR, but acts like NL */ /* intentional fall through */
+			case 0x0D: u = 0x24B9; goto x8D; break; /* CR, but acts like NL */
 			case 0x8D: u = 0x24CB;
-x8D:				if (debug) {prtuptflush(u);} prtflush("\n"); /* LF, but acts like NL */
+x8D:				if (debug) {prtuptflush(u);} prtflush("\n"); /* LF, but acts like NL */ /* intentional fall through */
 			case 0x92: 
-x92:				prtnumflush("\e[0;%dm", 40+backcolor%10); prtnumflush("\e[%dm", color); break; /* reverse off */
+x92:				prtnumflush("\e[0;%dm", backcolor); prtnumflush("\e[%dm", color); break; /* reverse off */
 			case 0x0E: shifted = 1; break;    /* lower case, text mode */
 			case 0x0F: mode = 1; shifted = 1; break; /* ISO mode */
 			case 0x11: prtflush("\e[B"); break; /* down */
