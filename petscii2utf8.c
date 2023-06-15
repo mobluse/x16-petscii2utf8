@@ -36,8 +36,8 @@ echochar(uint8_t c)
 	static int backcolor = 44; /* blue */
 
 	if ((0x00 <= c && c <= 0x1F) || (0x80 <= c && c <= 0x9F)) {
-		switch (c) { uint32_t u; int tempcolor;
-			case 0x01: tempcolor = color; 
+		switch (c) { uint32_t u;
+			case 0x01: int tempcolor = color; 
 				color = (backcolor/10==4?30:90)+backcolor%10;
 				backcolor = (tempcolor/10==3?40:100)+tempcolor%10; goto x92; break; /* swap colors */
 			case 0x05: prtnumflush("\e[%dm", color = 97); break; /* white */
@@ -168,7 +168,7 @@ x92:				prtnumflush("\e[0;%dm", backcolor); prtnumflush("\e[%dm", color); break;
 								switch (c) {
 									case 0x7E: prtuptflush(0x1FB96); break; // WAS: ▒ 0x2592
 									case 0x7F: prtuptflush(0x1FB98); break; // WAS: ░ 0x2591 aprox.
-									case 0xA9: prtuptflush(0x1FB99); break; // WAS: 0x2593 ▓ aprox.
+									case 0xA9: prtuptflush(0x1FB99); break; // WAS: ▓ 0x2593 aprox.
 									case 0xBA: prtuptflush(0x2713); break; // ✓
 									case 0xFF: prtuptflush(0x1FB96); break; // WAS: ▒ 0x2592
 									default:
