@@ -166,11 +166,11 @@ x92:				prtnumflush("\e[0;%dm", backcolor); prtnumflush("\e[%dm", color); break;
 								break;
 							case 1:
 								switch (c) {
-									case 0x7E: prtuptflush(0x1FB96); break; // 🮖 WAS: ▒ 0x2592
+									case 0x7E: prtuptflush(0x1FB90); break; // 🮐 WAS: ▒ 0x2592
 									case 0x7F: prtuptflush(0x1FB98); break; // 🮘 WAS: ░ 0x2591 aprox.
 									case 0xA9: prtuptflush(0x1FB99); break; // 🮙 WAS: ▓ 0x2593 aprox.
 									case 0xBA: prtuptflush(0x2713); break; // ✓
-									case 0xFF: prtuptflush(0x1FB96); break; // 🮖 WAS: ▒ 0x2592
+									case 0xFF: prtuptflush(0x1FB90); break; // 🮐 WAS: ▒ 0x2592
 									default:
 										if ('A' <=  c && c <= 'Z') {
 											c += 'a' - 'A';
