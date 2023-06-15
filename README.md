@@ -15,7 +15,7 @@ or if these are not installed:
 
     ./x16emu -echo raw | ~/x16-petscii2utf8/petscii2utf8 -d
 
-`READY.` is changed to `READY!` as a confirmation that it works (does not currently work). I you want to test the next release you can download
+`READY.` is changed to `READY!` as a confirmation that it works. I you want to test the next release you can download
 the source of x16-emulator, make, and run:
 
     git clone https://github.com/X16Community/x16-emulator
