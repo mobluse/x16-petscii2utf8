@@ -34,7 +34,6 @@ Keys might work in Commander X16 Emulator r33+ using:
 
 Keys in the terminal sending to the emulator does not work, unless you patch the emulator.
 
-![PETSCIIISO.BAS](petsciiiso-bas.png?raw=true "PETSCIIISO.BAS")
 ![PETSCIIISO.BAS PETSCII Unshifted](petscii-unshifted.png?raw=true "PETSCIIISO.BAS PETSCII Unshifted")
 ![PETSCIIISO.BAS PETSCII Shifted](petscii-shifted.png?raw=true "PETSCIIISO.BAS PETSCII Shifted")
 ![PETSCIIISO.BAS ISO8859-15 Shifted](iso8859-15-shifted.png?raw=true "PETSCIIISO.BAS ISO8859-15 Shifted")
