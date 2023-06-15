@@ -35,6 +35,9 @@ Keys might work in Commander X16 Emulator r33+ using:
 Keys in the terminal sending to the emulator does not work, unless you patch the emulator.
 
 ![PETSCIIISO.BAS](petsciiiso-bas.png?raw=true "PETSCIIISO.BAS")
+![PETSCIIISO.BAS PETSCII Unshifted](petscii-unshifted.png?raw=true "PETSCIIISO.BAS PETSCII Unshifted")
+![PETSCIIISO.BAS PETSCII Shifted](petscii-shifted.png?raw=true "PETSCIIISO.BAS PETSCII Shifted")
+![PETSCIIISO.BAS ISO8859-15 Shifted](iso8859-15-shifted.png?raw=true "PETSCIIISO.BAS ISO8859-15 Shifted")
 Try [petsciiiso.bas](https://github.com/mobluse/chargen-maker/blob/master/petsciiiso.bas)!
 ## Building PETSCII2UTF8
 Unfortunately I don't yet know `make` or `CMake` so I made a script `build.sh` that compiles the code to executables.
