@@ -199,7 +199,7 @@ catchkey(uint8_t c)
 				default: streak = 0;
 			}
 		} else if (streaktype == 'R') {
-			const char *s = "\r\nREADY.\r\n";
+			const char *s = "\rREADY.\r";
 			switch(streak) {
 				case 1: if (INSTREAK) {
 						++streak;
@@ -214,9 +214,9 @@ catchkey(uint8_t c)
 				case 4: PROC(streak); break;
 				case 5: PROC(streak); break;
 				case 6: PROC(streak); break;
-				case 7: PROC(streak); break;
-				case 8: PROC(streak); break;
-				case 9: if (INSTREAK) {
+				/* case 7: PROC(streak); break;
+				case 8: PROC(streak); break; */
+				case 7: if (INSTREAK) {
 						echochar(0x0D);
 						echochar('R');
 						echochar('E');
