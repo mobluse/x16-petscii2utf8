@@ -43,6 +43,7 @@ https://style64.org/petscii/
 https://dflund.se/~triad/krad/recode/petscii_c64en_uc.txt  
 https://dflund.se/~triad/krad/recode/petscii_c64en_lc.txt ─ These were used to generate some code using enter-unicode.  
 https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences  
+https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2002%20-%20Editor.md#new-control-characters  
 
 ## Acknowledgements
 See also: https://github.com/commanderx16/x16-emulator/pull/112
