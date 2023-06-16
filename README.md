@@ -1,6 +1,6 @@
 # x16-petscii2utf8
-This filter program converts output of the [Commander X16 Emulator](http://commanderx16.com) R33+ to UTF-8 looking like
-PETSCII-UC, PETSCII-LC, or ISO8859-15 depending on what is used. 
+This filter program for Linux converts output of the [Commander X16 Emulator](http://commanderx16.com) R33+ to UTF-8
+looking like PETSCII-UC, PETSCII-LC, or ISO8859-15 depending on what is used. 
 It also converts the control codes to ANSI/VT100/xterm Escape sequences. It can print some debug information
 e.g. Ⓓ & Ⓐ for CR & LF, if you use option -d. In the future also the keypresses will be shown, and there is some
 buggy support for that already.
